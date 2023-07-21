@@ -137,4 +137,4 @@ Known Issues
 
 
 Download Link:
-https://developer.vmware.com/samples/8152/vra-8-bulk-onboarding
+https://developer.vmware.com/samples/8189/aria-automation-bulk-onboarding-v39
