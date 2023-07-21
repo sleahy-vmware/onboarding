@@ -1,0 +1,140 @@
+Release Notes Bulk Onboarding Utility
+Last Updated - 21 July 2023
+
+Summary:
+Utility to export deployment and machine related metadata from vRA 7 and onboard 
+the deployments into vRA 8x or vRA Cloud. 
+
+########################################################
+User Guide and Download available at the end of the page
+########################################################
+vRO Package v39 - Release Date 21 July 2023
+- Support VMC Cloud accounts for vRA 8 - Cloud Migration
+- Support System Domain groups and users
+- Support single quote and pipe in deployment names
+
+vRO Package v38 - Release Date 7 June 2023
+- Improved cloud template validation
+- Fixed bug relating to resource allocation not getting set in onboarding plan for vRA 8.11 and 8.12
+- Increased environment object resources
+- Fix bug where history may be added more than once
+- Support for AWS resource
+
+vRO Package v34 - Release Date 12 December 2022
+- Fixed bug where cloud template can have a custom property that is just a number causes workflow to crash
+
+vRO Package v33 - Release Date 12 December 2022
+- Fixed some typos in log entries
+- Fixed version check bug
+- Fixed user lookup when user is an org owner
+
+vRO Package v32 - Release Date 24 November 2022
+- Support toggling of 'Use placements' flag on onboarding plans in vRA 8.10.1 and above
+
+vRO Package v31 - Release Date 18 November 2022
+- Support using machine name as component name for imported machines when not associating with a cloud template. 
+
+vRO Package v30 - Release Date 9 November 2022
+- bug fix for onboarding multi-machine deployments without assigning cloud templates
+
+vRO Package v29 - Release Date 26 October 2022
+- Updated user guide
+- bug fix for url encoding 
+
+vRO Package v28 - Release Date 24 October 2022
+- Support adding supplied static custom properties to all onboarded machines.
+- Support to assign associated cloud template icon to onboarded deployments.
+- Support to generate a metadata file that contains all deployment ids and machine ids of onboarded machines. This will allow for further extensibility and customisation.
+- Support for restoring the metadata db to its initial data capture. 
+
+vRO Package v26 - Release Date 18 October 2022
+- Added support to increase SCP timeout
+- Supports using Mass VM Unregister Database Process (vRA 7.6) to remove VMs from vRA 7 management post onboarding
+
+vRO Package v25 - Release Date 10 October 2022
+- Bug fix for history export 
+
+vRO Package v24 - Release Date 19 September 2022
+- Bug fixes to address issue with Network Name in vRA 8 based data collection
+- Bug fixes to address error when NOT assigning cloud templates
+- Bug fixes to address error when unable to extract create data for vRA 7 history item 
+
+vRO Package v23 - Release Date 1 September 2022
+- Added support for Network Name in vRA 7 x export
+
+vRO Package v22 - Release Date 31 August 2022
+- Added support for including vRA 7 x history during onboarding
+
+vRO Package v17 - Release Date 04 August 2022
+- Bug Fixes for data capture for discovered machines in vRA 8/Cloud
+
+vRO Package v16 - Release Date 28 July 2022
+- Added support for complex cloud templates with multiple components and clusters of components
+- Validation workflow now handles upload and storing of updated csv files.
+- Added support for project specified custom properties to be added to onboarded resources. 
+
+vRO Package v9 - Release Date 12 July 2022
+- Added support for configuring lease date on onboarded deployments
+- Improved data export from vRA 7, expect to export about 500 VMs per minute 
+
+Ported to VRO 
+To address some dependencies and to simplify the entire process we have ported the Bulk Onboarding Utility to vRO.
+The python scripts on their own will no longer be available. 
+
+Phase 4 - Release Data - 17 June 2022
+- Bug fixes
+
+Phase 3 - Release Data - 01 May 2022
+- Capture machine data from vRA 8/Cloud discovered machines
+- Support specific Component Name
+- Fixed bug in user validation on cloud
+- added support for password prompt at runtime
+- Support for default cloud template based on onboarding VM OS
+- Support for specific cloud template input in input csv
+- Support for cloud template validation
+- Deployment Componnet name extraceted from supplied cloud template
+- Enhacned user and group validation
+- Version check for adding users to root of project ( adding users no longer required in 8.8 ) 
+ 
+Phase 2 - Release Date - 12 Jan 2022
+- Improved validation logging 
+- Improved capture data logging 
+- Updated IAAS calls to be tenant specific 
+- Added multi-threading to improve performance 
+- Support correct case matching for user management on projects 
+- Support custom property renaming 
+- Improved support for custom property management using separate csv file
+- Support a delta export from vRA 7 to include any new deployments in the data set. This is achieved by running the 
+  captureMachineData.py with a -d flag .e.g. python3 captureMachineData.py -d
+- Support for bulk removal of VMs that have been deleted in vRA 7. This is achieved by setting the deletedvms 
+  parameter in the delta section of the onboarding.ini file. The deletedvms file specified must contain a virtualmachines 
+  section and a parameter called names. The names parameter should have a value of a comma separated list of VMs to be 
+  removed from the dataset. Once removed the VMs cannot be re-added to the onboarding process without starting 
+  the entire capture and review process again. Sample content for deletedvms file as follows. The validateOnboardingCSV.py 
+  script will detect the file and remove VMs accordingly from the dataset. The validateOnboardingCSV.py will also output a 
+  comma separated list of VMs that might have been deleted from vRA 7 and and no longer visible in vRA 8. 
+  This list once reviewed and verified can be used to populate the deletedvms file.
+        [virtualmachines]
+        names = dev-000581, dev-000582, dev-000579
+
+Phase 1 - Release Date - 14 Dec 2021
+- Initial capability to export all machine and deployment data from vRA 
+- Validate all provided data in csv is valid in vRA 8 
+    Project Exists
+    Deployment Owner is a member of project
+    vSphere Endpoint/Cloud Account is configured in vRA 8
+    Machines are visible in vRA 8 in the correct endpoint/Cloud Account
+- Onboard all machines
+  All machine in the export that complete validation successfully can be onboarded into the specified project in vRA 
+  Any specified custom properties are configured on the imported machine
+  Owners are temporarily added to the root of the project to support owner assignment in vRA 8 
+  Deployment names and descriptions are maintained from vRA 8
+- Post deployment Clean up 
+  Owners added to the root of the project are removed
+
+Known Issues
+- Pound Sign ( £ ) in the IAAS password is not supported, this is due to a limitation in curl 
+
+
+Download Link:
+https://developer.vmware.com/samples/8152/vra-8-bulk-onboarding
