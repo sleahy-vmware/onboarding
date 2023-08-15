@@ -1,5 +1,5 @@
 Release Notes Bulk Onboarding Utility
-Last Updated - 21 July 2023
+Last Updated - 15 August 2023
 
 Summary:
 Utility to export deployment and machine related metadata from vRA 7 and onboard 
@@ -8,6 +8,10 @@ the deployments into vRA 8x or vRA Cloud.
 ########################################################
 User Guide and Download available at the end of the page
 ########################################################
+ vRO Package v40 - Release Date 15 August 2023
+- Bug fig for version check issue with Aria Automation 8.13
+- Support setting vRA 7 deployment creation date to custom property vRA7_Created_Date when using vRA 7 as the data source  
+
 vRO Package v39 - Release Date 21 July 2023
 - Support VMC Cloud accounts for vRA 8 - Cloud Migration
 - Support System Domain groups and users
